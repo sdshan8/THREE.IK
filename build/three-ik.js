@@ -310,8 +310,8 @@
   }
 
   var Z_AXIS = new three.Vector3(0, 0, 1);
-  var DEG2RAD = three.Math.DEG2RAD,
-    RAD2DEG = three.Math.RAD2DEG;
+  var DEG2RAD = three.MathUtils.DEG2RAD,
+    RAD2DEG = three.MathUtils.RAD2DEG;
 
   /**
    * A class for a constraint.
@@ -1038,7 +1038,7 @@
       // use a dummy Object3D instead, otherwise the ConeBufferGeometry
       // will fall back to its default and not use 0 height.
       if (height !== 0) {
-        var geo = new three.ConeBufferGeometry(boneSize, height, 4);
+        var geo = new three.ConeGeometry(boneSize, height, 4);
         geo.applyMatrix4(new three.Matrix4().makeRotationAxis(new three.Vector3(1, 0, 0), Math.PI / 2));
         _this.boneMesh = new three.Mesh(geo, new three.MeshBasicMaterial({
           color: 0xff0000,

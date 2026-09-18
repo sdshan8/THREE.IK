@@ -1,4 +1,4 @@
-import { Vector3, Matrix4, Math as Math$1, Color, Object3D, ConeBufferGeometry, Mesh, MeshBasicMaterial, AxesHelper } from 'three';
+import { Vector3, Matrix4, MathUtils, Color, Object3D, ConeGeometry, Mesh, MeshBasicMaterial, AxesHelper } from 'three';
 
 function _arrayLikeToArray(r, a) {
   (null == a || a > r.length) && (a = r.length);
@@ -306,8 +306,8 @@ function transformPoint(vector, matrix, target) {
 }
 
 var Z_AXIS = new Vector3(0, 0, 1);
-var DEG2RAD = Math$1.DEG2RAD,
-  RAD2DEG = Math$1.RAD2DEG;
+var DEG2RAD = MathUtils.DEG2RAD,
+  RAD2DEG = MathUtils.RAD2DEG;
 
 /**
  * A class for a constraint.
@@ -1034,7 +1034,7 @@ var BoneHelper = /*#__PURE__*/function (_Object3D) {
     // use a dummy Object3D instead, otherwise the ConeBufferGeometry
     // will fall back to its default and not use 0 height.
     if (height !== 0) {
-      var geo = new ConeBufferGeometry(boneSize, height, 4);
+      var geo = new ConeGeometry(boneSize, height, 4);
       geo.applyMatrix4(new Matrix4().makeRotationAxis(new Vector3(1, 0, 0), Math.PI / 2));
       _this.boneMesh = new Mesh(geo, new MeshBasicMaterial({
         color: 0xff0000,
