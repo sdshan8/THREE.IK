@@ -1,33 +1,34 @@
-const rollup = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const cleanup = require('rollup-plugin-cleanup');
-const babel = require('rollup-plugin-babel');
+import { rollup } from 'rollup';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import { babel } from '@rollup/plugin-babel';
 
 export default {
   input: 'src/index.js',
   external: ['three'],
-  output: [{
-    file: './build/three-ik.js',
-    format: 'umd',
-    name: 'IK',
-  }, {
-    file: './build/three-ik.module.js',
-    format: 'es',
-  }],
-  globals: {
-    'three': 'THREE',
-  },
+  output: [
+    {
+      file: './build/three-ik.js',
+      format: 'umd',
+      name: 'IK',
+      globals: {
+        'three': 'THREE',
+      },
+    },
+    {
+      file: './build/three-ik.module.js',
+      format: 'es',
+    },
+  ],
   watch: {
     include: 'src/**',
   },
   plugins: [
     babel({
-      plugins: ['external-helpers'],
+      babelHelpers: 'bundled', // Replaces the old 'external-helpers' plugin
       exclude: 'node_modules/**',
     }),
-    resolve(),
+    nodeResolve(),
     commonjs(),
-    cleanup(),
   ],
 };

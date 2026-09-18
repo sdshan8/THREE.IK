@@ -1,7 +1,5 @@
-const rollup = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const cleanup = require('rollup-plugin-cleanup');
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
   input: 'demo/index.js',
@@ -10,13 +8,12 @@ export default {
     file: './demo/build.js',
     format: 'umd',
     name: 'App',
+    globals: {
+      'three': 'THREE',
+    },
   }],
-  globals: {
-    'three': 'THREE',
-  },
   plugins: [
-    resolve(),
-    commonjs(),
-    cleanup(),
+    nodeResolve(),
+    commonjs()
   ],
 };
