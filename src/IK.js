@@ -1,4 +1,5 @@
 import IKChain from './IKChain.js';
+import { AXES } from './utils.js';
 
 /**
  * Class representing IK structure.
@@ -8,9 +9,12 @@ class IK {
   /**
    * Create an IK structure.
    *
+   * @param {Object} [param={}] 
+   * @param {String} param.forwardAxis used to define the forward axis of the bones, default in 'z'
    */
-  constructor() {
+  constructor({forwardAxis} = {}) {
     this.chains = [];
+    this.forwardAxis = AXES[forwardAxis] ? forwardAxis : 'z';
     this._needsRecalculated = true;
 
     this.isIK = true;
@@ -70,8 +74,9 @@ class IK {
 
   /**
    * Performs the IK solution and updates bones.
+   * @param {number} [iterations=2] Number of interations
    */
-  solve() {
+  solve(iterations = 2) {
     // If we don't have a depth-sorted array of chains, generate it.
     // This is from the first `update()` call after creating.
     if (!this._orderedChains) {
@@ -79,8 +84,6 @@ class IK {
     }
 
     for (let subChains of this._orderedChains) {
-      // Hardcode to one for now
-      let iterations = 1; // this.iterations;
 
       while (iterations > 0) {
         for (let i = subChains.length - 1; i >= 0; i--) {

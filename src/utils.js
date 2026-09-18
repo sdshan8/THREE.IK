@@ -11,6 +11,19 @@ const t3 = new Vector3();
 const m1 = new Matrix4();
 
 /**
+ * Axis Lookup Table
+ */
+export const AXES = {
+  x: new THREE.Vector3(1, 0, 0),
+  y: new THREE.Vector3(0, 1, 0),
+  z: new THREE.Vector3(0, 0, 1),
+
+  '-x': new THREE.Vector3(-1, 0, 0),
+  '-y': new THREE.Vector3(0, -1, 0),
+  '-z': new THREE.Vector3(0, 0, -1)
+};
+
+/**
  * Returns the world position of object and sets
  * it on target.
  *
