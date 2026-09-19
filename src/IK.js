@@ -8,13 +8,9 @@ class IK {
 
   /**
    * Create an IK structure.
-   *
-   * @param {Object} [param={}] 
-   * @param {String} param.forwardAxis used to define the forward axis of the bones, default in 'z'
    */
-  constructor({forwardAxis} = {}) {
+  constructor() {
     this.chains = [];
-    this.forwardAxis = AXES[forwardAxis] ? forwardAxis : 'z';
     this._needsRecalculated = true;
 
     this.isIK = true;
@@ -40,7 +36,7 @@ class IK {
     if (!chain.isIKChain) {
       throw new Error('Argument is not an IKChain.');
     }
-
+    
     this.chains.push(chain);
   }
 

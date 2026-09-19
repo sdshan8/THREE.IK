@@ -205,14 +205,14 @@ var m1 = new Matrix4();
 /**
  * Axis Lookup Table
  */
-var AXES = {
-  x: new THREE.Vector3(1, 0, 0),
-  y: new THREE.Vector3(0, 1, 0),
-  z: new THREE.Vector3(0, 0, 1),
-  '-x': new THREE.Vector3(-1, 0, 0),
-  '-y': new THREE.Vector3(0, -1, 0),
-  '-z': new THREE.Vector3(0, 0, -1)
-};
+({
+  x: new Vector3(1, 0, 0),
+  y: new Vector3(0, 1, 0),
+  z: new Vector3(0, 0, 1),
+  '-x': new Vector3(-1, 0, 0),
+  '-y': new Vector3(0, -1, 0),
+  '-z': new Vector3(0, 0, -1)
+});
 
 /**
  * Returns the world position of object and sets
@@ -866,16 +866,10 @@ var IKChain = /*#__PURE__*/function () {
 var IK = /*#__PURE__*/function () {
   /**
    * Create an IK structure.
-   *
-   * @param {Object} [param={}] 
-   * @param {String} param.forwardAxis used to define the forward axis of the bones, default in 'z'
    */
   function IK() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      forwardAxis = _ref.forwardAxis;
     _classCallCheck(this, IK);
     this.chains = [];
-    this.forwardAxis = AXES[forwardAxis] ? forwardAxis : 'z';
     this._needsRecalculated = true;
     this.isIK = true;
 
