@@ -207,6 +207,18 @@
   var m1 = new three.Matrix4();
 
   /**
+   * Axis Lookup Table
+   */
+  var AXES = {
+    x: new THREE.Vector3(1, 0, 0),
+    y: new THREE.Vector3(0, 1, 0),
+    z: new THREE.Vector3(0, 0, 1),
+    '-x': new THREE.Vector3(-1, 0, 0),
+    '-y': new THREE.Vector3(0, -1, 0),
+    '-z': new THREE.Vector3(0, 0, -1)
+  };
+
+  /**
    * Returns the world position of object and sets
    * it on target.
    *
@@ -859,10 +871,15 @@
     /**
      * Create an IK structure.
      *
+     * @param {Object} [param={}] 
+     * @param {String} param.forwardAxis used to define the forward axis of the bones, default in 'z'
      */
     function IK() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        forwardAxis = _ref.forwardAxis;
       _classCallCheck(this, IK);
       this.chains = [];
+      this.forwardAxis = AXES[forwardAxis] ? forwardAxis : 'z';
       this._needsRecalculated = true;
       this.isIK = true;
 
@@ -949,10 +966,12 @@
 
       /**
        * Performs the IK solution and updates bones.
+       * @param {number} [iterations=2] Number of interations
        */
     }, {
       key: "solve",
       value: function solve() {
+        var iterations = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
         // If we don't have a depth-sorted array of chains, generate it.
         // This is from the first `update()` call after creating.
         if (!this._orderedChains) {
@@ -963,9 +982,6 @@
         try {
           for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
             var subChains = _step4.value;
-            // Hardcode to one for now
-            var iterations = 1; // this.iterations;
-
             while (iterations > 0) {
               for (var i = subChains.length - 1; i >= 0; i--) {
                 subChains[i]._updateJointWorldPositions();
