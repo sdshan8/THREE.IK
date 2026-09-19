@@ -14,13 +14,13 @@ const m1 = new Matrix4();
  * Axis Lookup Table
  */
 export const AXES = {
-  x: new THREE.Vector3(1, 0, 0),
-  y: new THREE.Vector3(0, 1, 0),
-  z: new THREE.Vector3(0, 0, 1),
+  x: new Vector3(1, 0, 0),
+  y: new Vector3(0, 1, 0),
+  z: new Vector3(0, 0, 1),
 
-  '-x': new THREE.Vector3(-1, 0, 0),
-  '-y': new THREE.Vector3(0, -1, 0),
-  '-z': new THREE.Vector3(0, 0, -1)
+  '-x': new Vector3(-1, 0, 0),
+  '-y': new Vector3(0, -1, 0),
+  '-z': new Vector3(0, 0, -1)
 };
 
 /**
